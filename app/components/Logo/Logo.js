@@ -1,14 +1,89 @@
-import React from 'react'
-import {View, Image, Text} from 'react-native'
-import styles from './styles'
+import React, { Component } from "react";
+import {
+  View,
+  Image,
+  Text,
+  Keyboard,
+  Animated,
+  Platform,
+  StyleSheet
+} from "react-native";
+import styles from "./styles";
 
-const Logo = () => (
-    <View style={styles.container}>
-        <Image  source={require('./images/entity.png')} 
-                resizeMode="contain"    
-                style={styles.containerImage}/>
+const ANIMATION_DURATION = 250;
+
+class Logo extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      containerImageWidth: new Animated.Value(styles.$largeContainerSize),
+      imageWidth: new Animated.Value(styles.$largeImageSize)
+    };
+  }
+
+  componentDidMount() {
+    const name = Platform.OS === "ios" ? "Will" : "Did";
+    this.keyboardDidShowListener = Keyboard.addListener(
+      `keyboard${name}Show`,
+      this.keyboardWillShow
+    );
+    this.keyboardDidHideListener = Keyboard.addListener(
+      `keyboard${name}Hide`,
+      this.keyboardWillHide
+    );
+  }
+
+  componentWillUnmount() {
+    this.keyboardDidShowListener.remove();
+    this.keyboardDidHideListener.remove();
+  }
+
+  keyboardWillShow = () => {
+    Animated.parallel([
+      Animated.timing(this.state.containerImageWidth, {
+        toValue: styles.$smallContainerSize,
+        duration: ANIMATION_DURATION
+      })
+    ]).start();
+  };
+
+  keyboardWillHide = () => {
+    Animated.parallel([
+      Animated.timing(this.state.containerImageWidth, {
+        toValue: styles.$largeContainerSize,
+        duration: ANIMATION_DURATION
+      })
+    ]).start();
+  };
+
+  render() {
+    const containerImageStyles = [
+      styles.containerImage,
+      {
+        width: this.state.containerImageWidth,
+        height: this.state.containerImageWidth
+      }
+    ];
+    const imageStyles = [
+      styles.logo,
+      { width: this.state.imageWidth },
+      this.props.tintColor ? { tintColor: this.props.tintColor } : null
+    ];
+
+    return (
+      <View style={styles.container}>
+        <Animated.View style={containerImageStyles}>
+          <Animated.Image
+            resizeMode="contain"
+            style={[StyleSheet.absoluteFill, containerImageStyles]}
+            source={require("./images/entity.png")}
+          />
+        </Animated.View>
         <Text style={styles.text}>Currency Converter</Text>
-    </View>
-)
+      </View>
+    );
+  }
+}
 
-export default Logo
+export default Logo;
