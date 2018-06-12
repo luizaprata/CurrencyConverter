@@ -4,7 +4,9 @@ import EStyleSheet from 'react-native-extended-stylesheet'
 
 EStyleSheet.build({
     $primaryBlue: '#4F6D7A',
-    $white:'#fff'
+    $white:'#fff',
+    $border: '#e2e2e2',
+    $inputText: '#797979',
 })
 
 export default () => (
