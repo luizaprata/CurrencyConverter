@@ -3,6 +3,7 @@ import { View, StatusBar } from 'react-native'
 import {Container} from '../components/Container'
 import {Logo} from '../components/Logo'
 import {InputWithButton} from '../components/TextInput'
+import {ClearButton} from '../components/Button';
 
 
 const TEMP_BASE_CURRENCY = 'USD'
@@ -24,6 +25,10 @@ class Home extends Component {
     console.log('text', text)
   }
 
+  handleSwapCurrency = () => {
+    console.log('swap')
+  }
+
   render(){
     return (
       <Container>
@@ -38,6 +43,8 @@ class Home extends Component {
                           onPress={this.handlePressQuoteCurrency} 
                           editable={false}
                           defaultValue={TEMP_QUOTE_PRICE}/>
+        <ClearButton  text="Reverse Currencies"
+                      onPress={this.handleSwapCurrency}/>
       </Container>
     )
   }
