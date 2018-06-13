@@ -1,5 +1,5 @@
 import React from 'react'
-import Options from './screens/Options'
+import Themes from './screens/Themes'
 import EStyleSheet from 'react-native-extended-stylesheet'
 
 EStyleSheet.build({
@@ -8,9 +8,12 @@ EStyleSheet.build({
     $border: '#e2e2e2',
     $inputText: '#797979',
     $lightGrey:'#f0f0f0',
-    $darkText: '#343434'
+    $darkText: '#343434',
+    $primaryOrange: '#D57A66',
+    $primaryGreen: '#00BD9D',
+    $primaryPurple: '#9E768F',
 })
 
 export default () => (
-    <Options/>
+    <Themes/>
 )
