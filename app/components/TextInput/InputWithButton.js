@@ -1,35 +1,39 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import {View, Text, TouchableHighlight, TextInput} from 'react-native'
-import styles from './styles'
-import color from 'color'
+import PropTypes from 'prop-types';
+import React from 'react';
+import { View, TextInput, TouchableHighlight, Text } from 'react-native';
+import color from 'color';
 
+import styles from './styles';
 
 const InputWithButton = (props) => {
-    const {buttonText, onPress, editable = true} = props;
-    const containerStyles = [styles.container]
-    const underlineColorAndroid = 'blue'
-    const underlayColor = color(styles.$buttonBackgroundColor).darken(styles.$buttonBackgroundColorModifier)
+  const underlayColor = color(styles.$buttonBackgroundColorBase).darken(
+    styles.$buttonBackgroundColorModifier,
+  );
 
-    if (!editable){
-        containerStyles.push(styles.containerDisabled)
-    }
+  const containerStyles = [styles.container];
+  if (props.editable === false) {
+    containerStyles.push(styles.containerDisabled);
+  }
 
-    return (
-        <View style={containerStyles}>
-            <TouchableHighlight style={styles.buttonContainer} underlineColorAndroid={underlineColorAndroid}>
-                <Text style={styles.buttonText}>{buttonText}</Text>
-            </TouchableHighlight>
-            <View style={styles.border} />
-            <TextInput style={styles.input} { ...props } underlineColorAndroid="transparent"/>
-        </View>
-    )
-}
+  return (
+    <View style={containerStyles}>
+      <TouchableHighlight
+        onPress={props.onPress}
+        style={styles.buttonContainer}
+        underlayColor={underlayColor}
+      >
+        <Text style={styles.buttonText}>{props.buttonText}</Text>
+      </TouchableHighlight>
+      <View style={styles.separator} />
+      <TextInput style={styles.input} underlineColorAndroid="transparent" {...props} />
+    </View>
+  );
+};
 
 InputWithButton.propTypes = {
-    buttonText:PropTypes.string,
-    onPress:PropTypes.func,
-    editable:PropTypes.bool
-}
+  onPress: PropTypes.func,
+  buttonText: PropTypes.string,
+  editable: PropTypes.bool,
+};
 
-export default InputWithButton
+export default InputWithButton;

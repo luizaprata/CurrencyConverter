@@ -1,14 +1,19 @@
-import React, { Component } from "react";
-import { FlatList, StatusBar, View } from "react-native";
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import { FlatList, StatusBar, View } from 'react-native';
+
 import { ListItem, Separator } from '../components/List';
+import currencies from '../data/currencies';
 
-import currencies from "../data/currencies";
-
-const TEMP_CURRENT_CURRENCY = "CAD";
+const TEMP_CURRENT_CURRENCY = 'CAD';
 
 class CurrencyList extends Component {
+  static propTypes = {
+    navigation: PropTypes.object,
+  };
+
   handlePress = () => {
-    console.log("row press");
+    this.props.navigation.goBack(null);
   };
 
   render() {

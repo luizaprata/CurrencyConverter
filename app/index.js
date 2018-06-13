@@ -1,5 +1,5 @@
 import React from 'react'
-import Themes from './screens/Themes'
+import Navigator from './config/routes';
 import EStyleSheet from 'react-native-extended-stylesheet'
 
 EStyleSheet.build({
@@ -15,5 +15,5 @@ EStyleSheet.build({
 })
 
 export default () => (
-    <Themes/>
+    <Navigator/>
 )
