@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { StatusBar, KeyboardAvoidingView } from 'react-native';
+import { changeCurrencyAmount, swapCurrency } from '../actions/currencies';
+
 
 import { Container } from '../components/Container';
 import { Logo } from '../components/Logo';
@@ -21,8 +23,8 @@ class Home extends Component {
     navigation: PropTypes.object,
   };
 
-  handleChangeText = () => {
-    console.log('change text');
+  handleChangeText = (text) => {
+    console.log(changeCurrencyAmount(text));
   };
 
   handlePressBaseCurrency = () => {
@@ -38,7 +40,7 @@ class Home extends Component {
   };
 
   handleSwapCurrency = () => {
-    console.log('handle swap currency');
+    console.log(swapCurrency());
   };
 
   handleOptionsPress = () => {
