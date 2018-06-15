@@ -5,9 +5,9 @@ import styles from './styles'
 
 
 const ClearButton = (props) => {
-    const {text} = props
+    const { text, onPress } = props
     return (
-        <TouchableOpacity style={styles.container}>
+        <TouchableOpacity style={styles.container} onPress={onPress}>
             <View style={styles.wrapper}>
                 <Image style={styles.icon} source={require('./images/iconRefresh.png')}/>
                 <Text style={styles.text}>{text}</Text>
@@ -22,3 +22,4 @@ ClearButton.propTypes = {
 }
 
 export default ClearButton
+
